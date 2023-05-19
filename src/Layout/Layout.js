@@ -1,7 +1,7 @@
 import Navigation from "../components/navigation/Navigation";
 const Layout = ({ children }) => {
   return (
-    <div>
+    <div className="layout">
       <Navigation />
       {children}
     </div>

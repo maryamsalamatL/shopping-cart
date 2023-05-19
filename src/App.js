@@ -1,3 +1,4 @@
+import "./App.css";
 import Layout from "./Layout/Layout";
 import { Routes, Route } from "react-router-dom";
 import routes from "./routes";
@@ -6,15 +7,13 @@ import CartPage from "./pages/cartPage/CartPage";
 
 function App() {
   return (
-    <div className="App">
-      <Layout>
-        <Routes>
-          {routes.map((route) => (
-            <Route {...route} key={route.path} />
-          ))}
-        </Routes>
-      </Layout>
-    </div>
+    <Layout>
+      <Routes>
+        {routes.map((route) => (
+          <Route {...route} key={route.path} />
+        ))}
+      </Routes>
+    </Layout>
   );
 }
 
