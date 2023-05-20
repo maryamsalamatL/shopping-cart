@@ -29,3 +29,14 @@
 .activeLink {
   background-color: #fff;
 }
+.badge {
+  background-color: rgba(220, 108, 194, 0.133);
+  color: darkmagenta;
+  margin-left: 5px;
+  padding: 3px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
