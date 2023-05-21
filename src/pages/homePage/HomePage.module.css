@@ -4,24 +4,25 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 30px 20px;
+  padding: 40px 30px;
 }
 .productList {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  grid-column-gap: 5rem;
-  grid-row-gap: 3rem;
-  background-color: #fff;
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-column-gap: 1.3rem;
+  grid-row-gap: 1.3rem;
+  background-color: rgb(241, 243, 244);
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  padding: 30px;
 }
 .product {
-  height: 300px;
-  margin: 10px;
+  background-color: #fff;
+  height: 250px;
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -30,18 +31,57 @@
 }
 .productImg {
   width: 100%;
-  height: 85%;
+  height: 55%;
 }
 .productImg img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 5px 5px 0 0;
+  -webkit-border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
+  -ms-border-radius: 5px 5px 0 0;
+  -o-border-radius: 5px 5px 0 0;
+}
+.productDesc {
+  width: 100%;
+  height: 45%;
+  padding: 10px 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .productInfo {
-  width: 100%;
-  height: 15%;
-  padding: 5px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  color: var(--primary-dark-blue);
+}
+
+.productRating {
+  display: flex;
+  justify-content: flex-start;
+}
+.productStars {
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: end;
+  margin-right: 5px;
+  color: var(--main-green);
+}
+.productRating span {
+  color: var(--text-gray);
+  font-size: 14px;
+}
+.addBtn {
+  width: 100%;
+  height: 32px;
+  background-color: inherit;
+  border: 1px solid var(--primary-dark-blue);
+  outline: none;
+  color: var(--primary-dark-blue);
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
 }
