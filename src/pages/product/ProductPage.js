@@ -1,40 +1,105 @@
 import { useParams } from "react-router-dom";
+import { useCart, useCartActions } from "../../provider/CartProvider";
 import styles from "./ProductPage.module.css";
 import { useEffect, useState } from "react";
 import * as data from "../../data";
+import { RiStarFill, RiStarHalfFill, RiTruckLine } from "react-icons/ri";
+import { toast } from "react-toastify";
+import { checkInCart } from "../../utils/checkInCart";
+import { Link } from "react-router-dom";
 
 const ProductPage = () => {
   const [product, setProduct] = useState(null);
+  const [quantity, setQuantity] = useState(null);
+  const { cart } = useCart();
   const { id } = useParams();
+
   useEffect(() => {
     const findedProduct = data.products.find((p) => p.id === Number(id));
     setProduct(findedProduct);
+    const inCartProduct = checkInCart(cart, findedProduct);
+    inCartProduct ? setQuantity(inCartProduct.quantity) : setQuantity(0);
   }, []);
-  console.log(product);
+
+  const decIncHandler = (type) => {
+    let newQty = quantity;
+    switch (type) {
+      case "DEC": {
+        newQty--;
+        break;
+      }
+      case "INC": {
+        newQty++;
+        break;
+      }
+      default:
+        return newQty;
+    }
+
+    setQuantity(newQty);
+  };
 
   return (
-    <main>
+    <main className={styles.main}>
       {product && (
         <section>
-          <div>
+          <div className={styles.imgBox}>
             <img src={product.image} />
           </div>
-          <div>
+          <div className={styles.description}>
             <h2>{product.name}</h2>
-            <div>rating</div>
+            <p className={styles.info}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </p>
+            <div className={styles.rating}>
+              <div className={styles.ratingStars}>
+                <RiStarFill />
+                <RiStarFill />
+                <RiStarFill />
+                <RiStarFill />
+                <RiStarHalfFill />
+              </div>
+              <span>{"(130)"}</span>
+            </div>
+            <span className={styles.hr}></span>
             <ul>
               {product.description.map((item) => (
                 <li key={item.support}>{item.support}</li>
               ))}
             </ul>
-            <div>
-              <button>-</button>
-              <p>1</p>
-              <button>+</button>
+            <span className={styles.hr}></span>
+            <div className={styles.priceSec}>
+              <span>${product.price.toFixed(2)}</span>
+              <div className={styles.qtyBtnBox}>
+                <button
+                  className={
+                    quantity === 0
+                      ? `${styles.qtyBtnDisabled} ${styles.qtyBtn}`
+                      : `${styles.qtyBtn}`
+                  }
+                  onClick={() => decIncHandler("DEC")}
+                >
+                  -
+                </button>
+                <p className={styles.qtyBtn}>{quantity}</p>
+                <button
+                  className={styles.qtyBtn}
+                  onClick={() => decIncHandler("INC")}
+                >
+                  +
+                </button>
+              </div>
             </div>
-            <div>
-              <button>Buy Now</button>
-              <button>Add to Cart</button>
+            <BtnSec cart={cart} product={product} quantity={quantity} />
+
+            <div className={styles.delivery}>
+              <span className={styles.deliveryIcon}>
+                <RiTruckLine />
+              </span>
+              <div style={{ padding: "0px 5px" }}>
+                <p className={styles.deliveryTitle}>Delivery information</p>
+                <span className="grayText">Lorem ipsum dolor sit amet </span>
+              </div>
             </div>
           </div>
         </section>
@@ -44,3 +109,44 @@ const ProductPage = () => {
 };
 
 export default ProductPage;
+
+const BtnSec = ({ cart, quantity, product }) => {
+  const dispatch = useCartActions();
+
+  const addProductHandler = (product) => {
+    if (!quantity) {
+      dispatch({
+        type: "REMOVE_PRODUCT",
+        payload: product,
+      });
+      toast.success(`${product.name} removed from the cart !`);
+    } else {
+      dispatch({
+        type: "MULTIPLE_ADD_TO_CART",
+        payload: product,
+        qty: quantity,
+      });
+      toast.success(`${product.name} added to cart !`);
+    }
+  };
+
+  return (
+    <div className={styles.btnBox}>
+      <button className={`${styles.btn} ${styles.buyBtn}`}>
+        <Link to="/checkout">Buy Now</Link>
+      </button>
+      <button
+        onClick={() => addProductHandler(product)}
+        className={`${styles.btn} ${styles.addBtn} ${
+          !quantity && !checkInCart(cart, product) && styles.disabled
+        }`}
+      >
+        {checkInCart(cart, product) && quantity
+          ? "update cart"
+          : checkInCart(cart, product) && !quantity
+          ? "Remove from cart"
+          : "Add to cart"}
+      </button>
+    </div>
+  );
+};

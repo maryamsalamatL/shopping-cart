@@ -8,6 +8,13 @@
 a {
   text-decoration: none;
 }
+.grayText {
+  font-size: 13px;
+  color: var(--text-gray);
+}
+button {
+  cursor: pointer;
+}
 :root {
   --primary-dark-blue: rgb(22, 24, 40);
   --secondary-dark-blue: rgb(39, 41, 61);
@@ -17,5 +24,6 @@ a {
   --main-gray: rgb(236, 240, 244);
   --pink-color: rgb(231, 99, 130);
   --text-white: rgb(222, 222, 222);
-  --text-gray: rgba(124, 120, 147, 0.8);
+  --text-gray: rgb(124, 120, 147);
+  --gold-color: rgb(249, 161, 45);
 }

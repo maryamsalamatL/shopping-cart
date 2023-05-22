@@ -5,12 +5,13 @@ import { useCartActions, useCart } from "../../provider/CartProvider";
 import { checkInCart } from "../../utils/checkInCart";
 import { toast } from "react-toastify";
 import { RiStarFill, RiStarHalfFill } from "react-icons/ri";
+import { BiCartAdd } from "react-icons/bi";
 
 const HomePage = () => {
   const { cart } = useCart();
   const dispatch = useCartActions();
   const addProductHandler = (product) => {
-    dispatch({ type: "ADD_TO_CART", payload: product });
+    dispatch({ type: "ADD_ONE_TO_CART", payload: product });
     toast.success(`${product.name} added to cart !`);
   };
 
@@ -18,35 +19,33 @@ const HomePage = () => {
     <section className={styles.container}>
       <ul className={styles.productList}>
         {data.products.map((product) => (
-          <Link to={`/product/${product.id}`}>
-            <li key={product.id} className={styles.product}>
+          <li key={product.id} className={styles.product}>
+            <Link to={`/product/${product.id}`}>
               <div className={styles.productImg}>
                 <img src={product.image} alt={product.name} />
               </div>
               <div className={styles.productDesc}>
-                <div className={styles.productInfo}>
-                  <p>{product.name}</p>
-                  <span>$ {product.price}</span>
-                </div>
-                <div className={styles.productRating}>
-                  <div className={styles.productStars}>
+                <span className="grayText">Sneakers</span>
+                <h3>{product.name}</h3>
+                <div className={styles.priceBox}>
+                  <span className={styles.price}>
+                    $ {product.price.toFixed(2)}
+                  </span>
+                  <div className={styles.productRating}>
                     <RiStarFill />
-                    <RiStarFill />
-                    <RiStarFill />
-                    <RiStarFill />
-                    <RiStarHalfFill />
+                    <span className="grayText">4.9 | 320</span>
                   </div>
-                  <span>{"(130)"}</span>
                 </div>
-                <button
-                  onClick={() => addProductHandler(product)}
-                  className={styles.addBtn}
-                >
-                  {checkInCart(cart, product) ? "in cart" : "Add to cart"}
-                </button>
               </div>
-            </li>
-          </Link>
+            </Link>
+            <button
+              onClick={() => addProductHandler(product)}
+              className={styles.addToCartBtn}
+            >
+              <BiCartAdd />
+              {/* {checkInCart(cart, product) ? "in cart" : <BiCartAdd/>} */}
+            </button>
+          </li>
         ))}
       </ul>
     </section>

@@ -50,7 +50,9 @@ const CartDetails = ({ cart }) => {
               <button className={styles.btn}>{item.quantity}</button>
               <button
                 className={styles.btn}
-                onClick={() => dispatch({ type: "ADD_TO_CART", payload: item })}
+                onClick={() =>
+                  dispatch({ type: "ADD_ONE_TO_CART", payload: item })
+                }
               >
                 +
               </button>

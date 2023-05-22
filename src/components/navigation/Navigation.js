@@ -1,10 +1,12 @@
 import { Link, NavLink } from "react-router-dom";
 import styles from "./Navigation.module.css";
 import { useCart } from "../../provider/CartProvider";
-import { BiSearch } from "react-icons/bi";
+
 import { SiShopify } from "react-icons/si";
 import { TbBrandShopee } from "react-icons/tb";
 import { RiShoppingCart2Line, RiHome4Line } from "react-icons/ri";
+import Search from "../../common/Search";
+
 const Navigation = () => {
   const { cart } = useCart();
 
@@ -16,12 +18,7 @@ const Navigation = () => {
         </span>{" "}
         SALAMAT SHOP
       </h2>
-      <div className={styles.searchBox}>
-        <input type="search" placeholder="Search product here ..." />
-        <button className={styles.searchBtn}>
-          <BiSearch />
-        </button>
-      </div>
+      <Search styles={styles} />
       <nav>
         <ul>
           <li>
