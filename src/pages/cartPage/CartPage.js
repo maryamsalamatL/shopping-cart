@@ -42,7 +42,7 @@ const CartDetails = ({ cart }) => {
               <button
                 className={styles.btn}
                 onClick={() =>
-                  dispatch({ type: "REMOVE_PRODUCT", payload: item })
+                  dispatch({ type: "INCREMENT_PRODUCT", payload: item })
                 }
               >
                 {item.quantity === 1 ? "remove" : "-"}

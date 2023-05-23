@@ -1,7 +1,7 @@
 const addOneProductToCart = (state, payload) => {
   const updatedCart = [...state.cart];
   const updatedItemIndex = updatedCart.findIndex(
-    (item) => item.id === payload.id
+    (item) => item._id === payload._id
   );
   if (updatedItemIndex < 0) {
     updatedCart.push({ ...payload, quantity: 1 });
@@ -11,7 +11,7 @@ const addOneProductToCart = (state, payload) => {
     updatedCart[updatedItemIndex] = updatedItem;
   }
   return { ...state, cart: updatedCart };
-  //   const index = state.cart.findIndex((p) => p.id === payload.id);
+  //   const index = state.cart.findIndex((p) => p._id === payload._id);
   //   //   console.log(index);
   //   if (index > -1) {
   //     const product = { ...state.cart[index] };
@@ -28,7 +28,7 @@ const addOneProductToCart = (state, payload) => {
 const addMultipleProductToCart = (state, { payload, qty }) => {
   const updatedCart = [...state.cart];
   const updatedItemIndex = updatedCart.findIndex(
-    (item) => item.id === payload.id
+    (item) => item._id === payload._id
   );
   if (updatedItemIndex < 0) {
     updatedCart.push({ ...payload, quantity: qty });
@@ -42,13 +42,13 @@ const addMultipleProductToCart = (state, { payload, qty }) => {
 const incrementProductQuantity = (state, payload) => {
   const updatedCart = [...state.cart];
   const updatedItemIndex = updatedCart.findIndex(
-    (item) => item.id === payload.id
+    (item) => item._id === payload._id
   );
   const updatedItem = { ...updatedCart[updatedItemIndex] };
   updatedItem.quantity--;
   if (updatedItem.quantity <= 0) {
     const filteredCart = updatedCart.filter(
-      (item) => item.id !== updatedItem.id
+      (item) => item._id !== updatedItem._id
     );
     return { ...state, cart: filteredCart };
   }
@@ -58,11 +58,13 @@ const incrementProductQuantity = (state, payload) => {
 const removeProductFromCart = (state, payload) => {
   const updatedCart = [...state.cart];
   const updatedItemIndex = updatedCart.findIndex(
-    (item) => item.id === payload.id
+    (item) => item._id === payload._id
   );
   const updatedItem = { ...updatedCart[updatedItemIndex] };
   updatedItem.quantity = 0;
-  const filteredCart = updatedCart.filter((item) => item.id !== updatedItem.id);
+  const filteredCart = updatedCart.filter(
+    (item) => item._id !== updatedItem._id
+  );
   return { ...state, cart: filteredCart };
 };
 const totalPriceCalculator = (state) => {

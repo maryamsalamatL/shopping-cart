@@ -7,6 +7,7 @@ import HomePage from "./pages/homePage/HomePage";
 import CartPage from "./pages/cartPage/CartPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 function App() {
   return (

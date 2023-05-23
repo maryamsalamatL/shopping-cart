@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useCart, useCartActions } from "../../provider/CartProvider";
 import styles from "./ProductPage.module.css";
 import { useEffect, useState } from "react";
-import * as data from "../../data";
+import http from "../../services/httpService";
 import { RiStarFill, RiStarHalfFill, RiTruckLine } from "react-icons/ri";
 import { toast } from "react-toastify";
 import { checkInCart } from "../../utils/checkInCart";
@@ -13,13 +13,21 @@ const ProductPage = () => {
   const [quantity, setQuantity] = useState(null);
   const { cart } = useCart();
   const { id } = useParams();
+  console.log(product);
+  useEffect(() => {
+    http
+      .get(`/product/${id}`)
+      .then(({ data }) => setProduct(data))
+      .catch((err) => console.log(err));
+  }, []);
 
   useEffect(() => {
-    const findedProduct = data.products.find((p) => p.id === Number(id));
-    setProduct(findedProduct);
-    const inCartProduct = checkInCart(cart, findedProduct);
-    inCartProduct ? setQuantity(inCartProduct.quantity) : setQuantity(0);
-  }, []);
+    if (product) {
+      const InCartProduct = checkInCart(cart, product);
+      InCartProduct ? setQuantity(InCartProduct.quantity) : setQuantity(0);
+    }
+    return;
+  }, [product]);
 
   const decIncHandler = (type) => {
     let newQty = quantity;
@@ -64,7 +72,7 @@ const ProductPage = () => {
             <span className={styles.hr}></span>
             <ul>
               {product.description.map((item) => (
-                <li key={item.support}>{item.support}</li>
+                <li key={item._id}>{item.support}</li>
               ))}
             </ul>
             <span className={styles.hr}></span>
