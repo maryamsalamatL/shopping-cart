@@ -1,10 +1,12 @@
 import { Field, ErrorMessage } from "formik";
+import styles from "./Input.module.css";
 
 const Input = ({ label, name, formik, type = "text" }) => {
   return (
     <div className="formController">
       <label htmlFor={name}>{label}</label>
       <input
+        className={styles.input}
         name={name}
         type={type}
         id={name}

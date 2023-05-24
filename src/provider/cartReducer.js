@@ -73,6 +73,10 @@ const totalPriceCalculator = (state) => {
   }, 0);
   return { ...state, total: totalPrice };
 };
+const clearCart = (state) => {
+  return state({ ...state, cart: [] });
+};
+
 const cartReducer = (state, action) => {
   switch (action.type) {
     case "ADD_ONE_TO_CART":
@@ -85,6 +89,8 @@ const cartReducer = (state, action) => {
       return removeProductFromCart(state, action.payload);
     case "TOTAL_PRICE":
       return totalPriceCalculator(state);
+    case "CLEAR_CART":
+      return clearCart(state);
     default:
       return state;
   }

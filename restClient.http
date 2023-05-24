@@ -6,8 +6,8 @@ POST http://localhost:5000/api/user/login HTTP/1.1
 content-type: application/json
 
 {
-    "email": "wahedm@gmail9.com",
-    "password": "1234579444"
+    "email": "maryamsalamat47@gmail.com",
+    "password": "1234$Msl"
 }
 
 ###
