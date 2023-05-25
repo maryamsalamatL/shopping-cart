@@ -4,6 +4,7 @@ import { object, string, ref, array, boolean, number } from "yup";
 import { Link } from "react-router-dom";
 import { signupUser } from "../../services/requestsServices";
 import { useState } from "react";
+import { useAuthActions } from "../../provider/AuthProvider";
 
 const initialValues = {
   name: "",
@@ -32,6 +33,7 @@ const validationSchema = object({
 
 const Signup = () => {
   const [error, setError] = useState(null);
+  const setAuth = useAuthActions();
 
   const onSubmit = (values) => {
     const { name, email, password, phoneNumber } = values;
@@ -43,7 +45,8 @@ const Signup = () => {
     };
     signupUser(userData)
       .then(({ data }) => {
-        console.log(data);
+        setAuth(data);
+        localStorage.setItem("authState", JSON.stringify(data));
         setError(null);
       })
       .catch((err) => {

@@ -8,19 +8,22 @@ import CartPage from "./pages/cartPage/CartPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import AuthProvider from "./provider/AuthProvider";
 
 function App() {
   return (
-    <CartProvider>
-      <Layout>
-        <ToastContainer />
-        <Routes>
-          {routes.map((route) => (
-            <Route {...route} key={route.path} />
-          ))}
-        </Routes>
-      </Layout>
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+        <Layout>
+          <ToastContainer />
+          <Routes>
+            {routes.map((route) => (
+              <Route {...route} key={route.path} />
+            ))}
+          </Routes>
+        </Layout>
+      </CartProvider>
+    </AuthProvider>
   );
 }
 

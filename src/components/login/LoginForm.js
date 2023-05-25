@@ -4,6 +4,7 @@ import { object, string, ref, array, boolean, number } from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../services/requestsServices";
 import { useState } from "react";
+import { useAuthActions } from "../../provider/AuthProvider";
 
 const initialValues = {
   email: "",
@@ -15,12 +16,14 @@ const validationSchema = object({
 });
 
 const LoginForm = () => {
+  const setAuth = useAuthActions();
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const onSubmit = (values) => {
     loginUser(values)
       .then(({ data }) => {
-        console.log(data);
+        setAuth(data);
+        localStorage.setItem("authState", JSON.stringify(data));
         setError(null);
         navigate("/");
       })

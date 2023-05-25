@@ -74,7 +74,7 @@ const totalPriceCalculator = (state) => {
   return { ...state, total: totalPrice };
 };
 const clearCart = (state) => {
-  return state({ ...state, cart: [] });
+  return { ...state, cart: [] };
 };
 
 const cartReducer = (state, action) => {

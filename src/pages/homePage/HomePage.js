@@ -8,14 +8,20 @@ import { toast } from "react-toastify";
 import { RiStarFill, RiStarHalfFill } from "react-icons/ri";
 import { BiCartAdd } from "react-icons/bi";
 import { useState, useEffect } from "react";
+import Search from "../../common/Search";
 
 const HomePage = () => {
+  const [allProducts, setAllProducts] = useState([]);
   const [products, setProducts] = useState([]);
+
   const { cart } = useCart();
   useEffect(() => {
     http
       .get("/product")
-      .then(({ data }) => setProducts(data))
+      .then(({ data }) => {
+        setAllProducts(data);
+        setProducts(data);
+      })
       .catch((err) => console.log(err));
   }, []);
 
@@ -25,8 +31,19 @@ const HomePage = () => {
     toast.success(`${product.name} added to cart !`);
   };
 
+  const searchHandler = (e) => {
+    const value = e.target.value;
+
+    const filteredProducts = allProducts.filter((p) =>
+      p.name.toLowerCase().includes(value.toLowerCase())
+    );
+    setProducts(filteredProducts);
+    console.log(filteredProducts);
+  };
+
   return (
     <section className={styles.container}>
+      <Search searchHandler={searchHandler} />
       <ul className={styles.productList}>
         {products.length
           ? products.map((product) => (

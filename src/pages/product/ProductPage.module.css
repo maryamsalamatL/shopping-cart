@@ -1,22 +1,21 @@
 .main {
   width: 100%;
-  height: auto;
   background-color: #fff;
   color: var(--primary-dark-blue);
+  padding: 1rem 0.2rem;
 }
 .main section {
   width: 100%;
-  height: 90%;
   display: flex;
+  flex-direction: column;
 }
-
 .imgBox {
-  width: 50%;
-  height: 600px;
+  width: 100%;
+  height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 3rem;
+  padding: 0rem 1rem;
 }
 .imgBox img {
   width: 100%;
@@ -33,10 +32,9 @@
   border-bottom: 1px solid rgba(39, 41, 61, 0.22);
 }
 .description {
-  width: 50%;
-  padding: 3rem;
+  width: 100%;
+  padding: 1rem;
   display: flex;
-
   flex-direction: column;
 }
 .info {
@@ -52,7 +50,7 @@
 .ratingStars {
   font-size: 1rem;
   display: inline-flex;
-  align-items: end;
+  align-items: flex-end;
   margin-right: 5px;
   color: var(--gold-color);
 }
@@ -60,7 +58,6 @@
   color: var(--text-gray);
   font-size: 14px;
 }
-
 .description ul {
   width: 100%;
   height: auto;
@@ -76,10 +73,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 30px;
+  margin-top: 25px;
 }
 .priceSec span {
-  font-size: 20px;
+  font-size: 18px;
   color: var(--main-green);
   font-weight: bold;
 }
@@ -87,11 +84,10 @@
   display: flex;
 }
 .qtyBtn {
-  padding: 5px 15px;
-
+  padding: 3px 10px;
   border: 1px solid rgba(199, 223, 246, 0.5);
   background-color: var(--main-gray);
-  font-size: 18px;
+  font-size: 15px;
 }
 .qtyBtn:first-child {
   border-right: none;
@@ -121,10 +117,10 @@
 }
 .btn {
   width: 49%;
-  height: 38px;
+  height: 35px;
   outline: none;
-  border: 2px solid var(--main-green);
-  font-size: 1rem;
+  border: none;
+  font-size: 0.8rem;
   font-weight: bold;
   border-radius: 10px;
   -webkit-border-radius: 10px;
@@ -137,12 +133,12 @@
   pointer-events: none;
 }
 .addBtn {
-  color: var(--main-green);
-  background-color: inherit;
+  background-color: var(--main-green);
+  color: var(--text-white);
 }
 .buyBtn {
   color: var(--text-white);
-  background-color: var(--main-green);
+  background-color: var(--primary-dark-blue);
 }
 .buyBtn a {
   color: var(--text-white);
@@ -163,6 +159,38 @@
 }
 .deliveryIcon {
   font-size: 1.3rem;
-
   color: var(--pink-color);
+}
+@media only screen and (min-width: 768px) {
+  .main {
+    padding: 0;
+  }
+  .main section {
+    height: 90%;
+    display: flex;
+    flex-direction: row;
+  }
+  .imgBox {
+    width: 50%;
+    height: 600px;
+    padding: 3rem;
+  }
+  .description {
+    width: 50%;
+    padding: 3rem;
+  }
+  .priceSec {
+    margin-top: 30px;
+  }
+  .priceSec span {
+    font-size: 20px;
+  }
+  .qtyBtn {
+    padding: 5px 15px;
+    font-size: 18px;
+  }
+  .btn {
+    height: 38px;
+    font-size: 1rem;
+  }
 }
