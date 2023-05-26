@@ -8,14 +8,15 @@ import {
   BiTrash,
   BiChevronLeftSquare,
 } from "react-icons/bi";
+import { useAuth } from "../../provider/AuthProvider";
 
 const CartPage = () => {
   const { cart } = useCart();
   const dispatch = useCartActions();
+
   useEffect(() => {
     dispatch({ type: "TOTAL_PRICE" });
   }, [cart]);
-
   return (
     <main className={styles.main}>
       {cart.length ? (
@@ -101,11 +102,12 @@ const CartDetails = ({ cart }) => {
 
 const CartSummary = () => {
   const { total } = useCart();
+  const auth = useAuth();
   return (
     <div className={styles.cartSummary}>
       <h2>Cart Summary</h2>
       <h4>total : $ {total}</h4>
-      <Link to="/checkout">
+      <Link to={`${auth ? "/checkout" : "/signup?redirect=checkout"}`}>
         <button>Go to checkout</button>
       </Link>
     </div>

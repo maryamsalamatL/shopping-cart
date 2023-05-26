@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { signupUser } from "../../services/requestsServices";
 import { useState } from "react";
 import { useAuthActions } from "../../provider/AuthProvider";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const initialValues = {
   name: "",
@@ -34,6 +35,9 @@ const validationSchema = object({
 const Signup = () => {
   const [error, setError] = useState(null);
   const setAuth = useAuthActions();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const redirect = searchParams.get("redirect") || "";
 
   const onSubmit = (values) => {
     const { name, email, password, phoneNumber } = values;
@@ -46,8 +50,9 @@ const Signup = () => {
     signupUser(userData)
       .then(({ data }) => {
         setAuth(data);
-        localStorage.setItem("authState", JSON.stringify(data));
+
         setError(null);
+        navigate(`/${redirect}`);
       })
       .catch((err) => {
         if (err.response && err.response.data.message) {
@@ -86,7 +91,7 @@ const Signup = () => {
         />
         <button type="submit">Signup</button>
         {error && <p style={{ color: "red" }}>{error}</p>}
-        <Link to="/login">
+        <Link to={`/login${redirect && `?redirect=${redirect}`}`}>
           <p>Already login ?</p>
         </Link>
       </form>

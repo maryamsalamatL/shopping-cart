@@ -1,7 +1,7 @@
 import Input from "../../common/Input";
 import { useFormik } from "formik";
 import { object, string, ref, array, boolean, number } from "yup";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { loginUser } from "../../services/requestsServices";
 import { useState } from "react";
 import { useAuthActions } from "../../provider/AuthProvider";
@@ -18,14 +18,16 @@ const validationSchema = object({
 const LoginForm = () => {
   const setAuth = useAuthActions();
   const [error, setError] = useState(null);
+  const [searchParams] = useSearchParams();
+  const redirect = searchParams.get("redirect") || "";
   const navigate = useNavigate();
+
   const onSubmit = (values) => {
     loginUser(values)
       .then(({ data }) => {
         setAuth(data);
-        localStorage.setItem("authState", JSON.stringify(data));
         setError(null);
-        navigate("/");
+        navigate(`/${redirect}`);
       })
       .catch((err) => {
         if (err.response && err.response.data.message) {
@@ -52,7 +54,8 @@ const LoginForm = () => {
         />
         <button type="submit">Login</button>
         {error && <p style={{ color: "red" }}>{error}</p>}
-        <Link to="/signup">
+
+        <Link to={`/signup${redirect && `?redirect=${redirect}`}`}>
           <p>Not singup yet ?</p>
         </Link>
       </form>
