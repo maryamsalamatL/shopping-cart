@@ -11,19 +11,6 @@ const addOneProductToCart = (state, payload) => {
     updatedCart[updatedItemIndex] = updatedItem;
   }
   return { ...state, cart: updatedCart };
-  //   const index = state.cart.findIndex((p) => p._id === payload._id);
-  //   //   console.log(index);
-  //   if (index > -1) {
-  //     const product = { ...state.cart[index] };
-  //     product.quantity++;
-  //     const updatedCart = [...state.cart];
-  //     updatedCart[index] = product;
-  //     return { ...state, cart: updatedCart };
-  //   }
-  //   return {
-  //     ...state,
-  //     cart: [...state.cart, { ...payload, quantity: 1 }],
-  //   };
 };
 const addMultipleProductToCart = (state, { payload, qty }) => {
   const updatedCart = [...state.cart];
@@ -69,7 +56,7 @@ const removeProductFromCart = (state, payload) => {
 };
 const totalPriceCalculator = (state) => {
   const totalPrice = state.cart.reduce((acc, curr) => {
-    return acc + curr.price * curr.quantity;
+    return acc + curr.offPrice * curr.quantity;
   }, 0);
   return { ...state, total: totalPrice };
 };

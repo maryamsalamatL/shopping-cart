@@ -4,8 +4,9 @@ import { object, string, ref, array, boolean, number } from "yup";
 import { Link } from "react-router-dom";
 import { signupUser } from "../../services/requestsServices";
 import { useState } from "react";
-import { useAuthActions } from "../../provider/AuthProvider";
+import { useAuthActions, useAuth } from "../../provider/AuthProvider";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import styles from "./SignupForm.module.css";
 
 const initialValues = {
   name: "",
@@ -15,20 +16,21 @@ const initialValues = {
   passwordConfirm: "",
 };
 const validationSchema = object({
-  name: string().required("name is required"),
-  email: string().email("Invalid email format").required("email is required"),
+  name: string().required("Name is required"),
+  email: string().email("Invalid email format").required("Email is required"),
   phoneNumber: string()
-    .required("phone number is required")
-    .matches(/^[0-9]{11}/, "invalid phone number")
+    .required("Phone number is required")
+    .matches(/^[0-9]{11}/, "Invalid phone number")
     .nullable(),
 
-  password: string().required("password is required"),
-  // .matches(
-  //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-  //   "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
-  // ),
+  password: string()
+    .required("Password is required")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+    ),
   passwordConfirm: string()
-    .required("passwordConfirm is required")
+    .required("PasswordConfirm is required")
     .oneOf([ref("password"), null], "password must match"),
 });
 
@@ -50,7 +52,7 @@ const Signup = () => {
     signupUser(userData)
       .then(({ data }) => {
         setAuth(data);
-
+        localStorage.setItem("authState", JSON.stringify(data));
         setError(null);
         navigate(`/${redirect}`);
       })
@@ -67,8 +69,9 @@ const Signup = () => {
     validateOnMount: true,
   });
   return (
-    <div>
+    <div className={styles.mainContainer}>
       <form onSubmit={formik.handleSubmit}>
+        <h1>Singup</h1>
         <Input name="name" formik={formik} label="Name" />
         <Input name="email" formik={formik} label="Email" type="email" />
         <Input
@@ -89,9 +92,14 @@ const Signup = () => {
           label="Password Confirm"
           type="password"
         />
-        <button type="submit">Signup</button>
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        <Link to={`/login${redirect && `?redirect=${redirect}`}`}>
+        <button type="submit" className={styles.btn} disabled={!formik.isValid}>
+          Signup
+        </button>
+        {error && <p className="error">{error}</p>}
+        <Link
+          className={styles.link}
+          to={`/login${redirect && `?redirect=${redirect}`}`}
+        >
           <p>Already login ?</p>
         </Link>
       </form>

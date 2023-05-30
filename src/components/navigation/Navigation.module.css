@@ -4,24 +4,25 @@
   height: 5rem;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 5px;
 }
 .title {
-  width: 60%;
+  width: 70%;
 }
 .title h2 {
   font-size: 1.3rem;
   color: var(--text-white);
 }
-.mainContainer div:last-child {
-  width: 40%;
+.sideContainer {
+  width: 30%;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-end;
 }
 
 .mainContainer nav {
-  width: 30%;
+  width: 60%;
 }
 .mainContainer ul {
   width: 100%;
@@ -34,10 +35,10 @@
   text-decoration: none;
   font-size: 1.2rem;
   color: var(--text-gray);
-
   display: flex;
   align-items: center;
 }
+
 .cartLink {
   position: relative;
 }
@@ -61,27 +62,45 @@
 }
 .profile {
   height: 30px;
-  border-left: 1px solid var(--text-gray);
+  width: 40%;
   display: flex;
   align-items: center;
-  padding: 5px;
-  margin-left: 3px;
+  padding-left: 5px;
+  margin-left: 10px;
+  border-left: 1px solid var(--text-gray);
 }
 .profile a {
-  font-size: 1rem;
+  width: 100%;
 }
-@media only screen and (max-width: 600px) {
+.profileIcon {
+  width: 30px;
+  height: 30px;
+  background-color: var(--pink-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-white);
+  font-weight: bold;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
 }
+
 @media only screen and (min-width: 768px) {
   .mainContainer {
     height: 5.5rem;
     padding: 25px;
   }
+  .title {
+    width: 60%;
+  }
   .title h2 {
     font-size: 2rem;
   }
-  .mainContainer div:last-child {
-    justify-content: flex-end;
+  .sideContainer {
+    width: 40%;
   }
   .mainContainer nav {
     width: 25%;
@@ -95,7 +114,7 @@
   }
 
   .mainContainer a {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
   .cartLink {
     position: relative;
@@ -107,13 +126,12 @@
     right: -5px;
   }
   .profile {
+    width: 20%;
     height: 40px;
-    padding: 5px;
-    margin-left: 10px;
-    justify-content: flex-start;
+    padding-left: 15px;
   }
-  .profile a {
-    display: block;
-    width: 100%;
+  .profileIcon {
+    width: 45px;
+    height: 45px;
   }
 }

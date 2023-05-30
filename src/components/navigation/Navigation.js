@@ -3,9 +3,8 @@ import styles from "./Navigation.module.css";
 import { useCart } from "../../provider/CartProvider";
 import { useAuth } from "../../provider/AuthProvider";
 import { SiShopify } from "react-icons/si";
-import { TbBrandShopee } from "react-icons/tb";
 import { RiShoppingCart2Line, RiHome4Line } from "react-icons/ri";
-import Search from "../../common/Search";
+import { FiLogIn } from "react-icons/fi";
 
 const Navigation = () => {
   const { cart } = useCart();
@@ -21,8 +20,8 @@ const Navigation = () => {
           SALAMAT SHOP
         </h2>
       </div>
-      {/* <Search styles={styles} /> */}
-      <div>
+
+      <div className={styles.sideContainer}>
         <nav>
           <ul>
             <li>
@@ -52,7 +51,13 @@ const Navigation = () => {
         </nav>
         <div className={styles.profile}>
           <Link to={auth ? "/profile" : "/login"}>
-            {auth ? "profile" : "login/signup"}
+            {auth ? (
+              <p className={styles.profileIcon}>
+                {auth.email.slice(0, 1).toUpperCase()}
+              </p>
+            ) : (
+              <FiLogIn />
+            )}
           </Link>
         </div>
       </div>

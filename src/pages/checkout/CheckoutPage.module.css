@@ -1,0 +1,122 @@
+.mainContainer {
+  width: 100%;
+  min-height: calc(100vh - 5rem);
+  color: var(--primary-dark-blue);
+
+  padding: 1.5rem 0.5rem;
+}
+.mainContainer h1 {
+  margin-bottom: 0.2rem;
+  font-size: 1.5rem;
+}
+.mainContainer .link {
+  color: var(--pink-color);
+  margin-bottom: 2rem;
+  font-size: 13px;
+  display: flex;
+  align-items: flex-end;
+}
+.mainContainer section {
+  display: flex;
+  flex-direction: column;
+}
+.infoSec {
+  width: 100%;
+
+  border: 1px solid rgba(173, 163, 163, 0.246);
+  padding: 15px 5px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.infoSec h3 {
+  margin-bottom: 15px;
+}
+.infoSec p {
+  margin-bottom: 5px;
+}
+.payment {
+  width: 100%;
+
+  border: 1px solid rgba(173, 163, 163, 0.246);
+  padding: 15px 5px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.payment ul {
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid rgba(173, 163, 163, 0.246);
+}
+li.titleSec {
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: var(--text-gray);
+}
+.payment li {
+  width: 100%;
+  display: flex;
+}
+.payment li span {
+  width: calc(100% / 3);
+}
+
+.payment li span:first-child ~ span {
+  text-align: center;
+}
+.payment li span:last-child {
+  text-align: right !important;
+}
+.payment button {
+  width: 100%;
+  height: 30px;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  background-color: var(--main-green);
+  color: #fff;
+  margin-top: 15px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+.total {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media only screen and (min-width: 768px) {
+  .mainContainer {
+    padding: 3rem;
+  }
+  .mainContainer h1 {
+    font-size: 2rem;
+  }
+  .mainContainer .link {
+    font-size: 15px;
+  }
+  .mainContainer section {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .infoSec {
+    width: 49%;
+    margin-bottom: 0;
+  }
+  .payment {
+    width: 49%;
+  }
+  .payment button {
+    height: 35px;
+    font-size: 17px;
+  }
+}

@@ -5,3 +5,9 @@
   list-style: none;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+body {
+  min-height: 100vh;
+  height: auto;
+  width: 100%;
+  overflow-y: scroll;
+}

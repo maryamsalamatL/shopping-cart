@@ -3,7 +3,7 @@ import CartPage from "./pages/cartPage/CartPage";
 import CheckoutPage from "./pages/checkout/CheckoutPage";
 import LoginPage from "./pages/login/LoginPage";
 import SignupPage from "./pages/signup/SignupPage";
-import NotFoundPage from "./pages/NotFoundPage";
+import NotFoundPage from "./pages/notFound/NotFoundPage";
 import ProductPage from "./pages/product/ProductPage";
 import UserProfilePage from "./pages/userProfile/UserProfilePage";
 

@@ -1,9 +1,8 @@
 import { BiSearch } from "react-icons/bi";
-import { useState } from "react";
 import styles from "./Search.module.css";
 
 const Search = ({ searchHandler }) => {
-  const [searchValue, setSearchValue] = useState("");
+ 
   const clickHandler = (e) => {
     e.preventDefault();
   };

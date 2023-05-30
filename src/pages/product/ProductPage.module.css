@@ -17,6 +17,7 @@
   align-items: center;
   padding: 0rem 1rem;
 }
+
 .imgBox img {
   width: 100%;
   height: 100%;
@@ -67,6 +68,7 @@
 }
 .description ul li {
   margin: 5px 0px;
+  text-align: right;
 }
 .priceSec {
   width: 100%;
@@ -79,6 +81,12 @@
   font-size: 18px;
   color: var(--main-green);
   font-weight: bold;
+}
+.prevPrice {
+  text-decoration-line: line-through;
+  color: var(--red-color) !important;
+  margin-right: 5px;
+  -moz-text-decoration-line: line-through;
 }
 .qtyBtnBox {
   display: flex;
@@ -175,6 +183,7 @@
     height: 600px;
     padding: 3rem;
   }
+
   .description {
     width: 50%;
     padding: 3rem;

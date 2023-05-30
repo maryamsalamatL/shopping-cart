@@ -1,13 +1,8 @@
 import { useCart, useCartActions } from "../../provider/CartProvider";
 import styles from "./CartPage.module.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import {
-  BiCheckbox,
-  BiCheckboxChecked,
-  BiTrash,
-  BiChevronLeftSquare,
-} from "react-icons/bi";
+import { BiTrash, BiChevronLeftSquare } from "react-icons/bi";
 import { useAuth } from "../../provider/AuthProvider";
 
 const CartPage = () => {
@@ -102,11 +97,26 @@ const CartDetails = ({ cart }) => {
 
 const CartSummary = () => {
   const { total } = useCart();
+  const { cart } = useCart();
+  const totalPrice = cart.reduce((acc, curr) => {
+    return acc + curr.price * curr.quantity;
+  }, 0);
   const auth = useAuth();
   return (
     <div className={styles.cartSummary}>
       <h2>Cart Summary</h2>
-      <h4>total : $ {total}</h4>
+      <div>
+        <span>cart total :</span>
+        <span>${totalPrice.toFixed(2)}</span>
+      </div>
+      <div>
+        <span>cart discount :</span>
+        <span>${(totalPrice - total).toFixed(2)}</span>
+      </div>
+      <div className={styles.netPrice}>
+        <span>net price:</span>
+        <span>${total.toFixed(2)}</span>
+      </div>
       <Link to={`${auth ? "/checkout" : "/signup?redirect=checkout"}`}>
         <button>Go to checkout</button>
       </Link>

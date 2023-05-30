@@ -1,22 +1,21 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useCart, useCartActions } from "../../provider/CartProvider";
 import styles from "./ProductPage.module.css";
 import { useEffect, useState } from "react";
-import http from "../../services/httpService";
+import { getOneProduct } from "../../services/requestsServices";
 import { RiStarFill, RiStarHalfFill, RiTruckLine } from "react-icons/ri";
 import { toast } from "react-toastify";
 import { checkInCart } from "../../utils/checkInCart";
-import { Link } from "react-router-dom";
+import { useAuth } from "../../provider/AuthProvider";
 
 const ProductPage = () => {
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(null);
   const { cart } = useCart();
   const { id } = useParams();
-  console.log(product);
+
   useEffect(() => {
-    http
-      .get(`/product/${id}`)
+    getOneProduct(id)
       .then(({ data }) => setProduct(data))
       .catch((err) => console.log(err));
   }, []);
@@ -26,7 +25,6 @@ const ProductPage = () => {
       const InCartProduct = checkInCart(cart, product);
       InCartProduct ? setQuantity(InCartProduct.quantity) : setQuantity(0);
     }
-    return;
   }, [product]);
 
   const decIncHandler = (type) => {
@@ -49,7 +47,7 @@ const ProductPage = () => {
 
   return (
     <main className={styles.main}>
-      {product && (
+      {product ? (
         <section>
           <div className={styles.imgBox}>
             <img src={product.image} />
@@ -77,7 +75,7 @@ const ProductPage = () => {
             </ul>
             <span className={styles.hr}></span>
             <div className={styles.priceSec}>
-              <span>${product.price.toFixed(2)}</span>
+              <PriceSec product={product} />
               <div className={styles.qtyBtnBox}>
                 <button
                   className={
@@ -111,6 +109,8 @@ const ProductPage = () => {
             </div>
           </div>
         </section>
+      ) : (
+        <p className="loading">Loading ...</p>
       )}
     </main>
   );
@@ -120,6 +120,7 @@ export default ProductPage;
 
 const BtnSec = ({ cart, quantity, product }) => {
   const dispatch = useCartActions();
+  const auth = useAuth();
 
   const addProductHandler = (product) => {
     if (!quantity) {
@@ -140,8 +141,20 @@ const BtnSec = ({ cart, quantity, product }) => {
 
   return (
     <div className={styles.btnBox}>
-      <button className={`${styles.btn} ${styles.buyBtn}`}>
-        <Link to="/checkout">Buy Now</Link>
+      <button
+        className={`${styles.btn} ${styles.buyBtn} ${
+          !quantity && styles.disabled
+        }`}
+      >
+        <Link
+          to={
+            auth
+              ? `/checkout?product=${product._id}&quantity=${quantity}`
+              : `/signup?redirect=checkout&product=${product._id}&quantity=${quantity}`
+          }
+        >
+          Buy Now
+        </Link>
       </button>
       <button
         onClick={() => addProductHandler(product)}
@@ -155,6 +168,21 @@ const BtnSec = ({ cart, quantity, product }) => {
           ? "Remove from cart"
           : "Add to cart"}
       </button>
+    </div>
+  );
+};
+
+const PriceSec = ({ product }) => {
+  return (
+    <div>
+      {product.discount !== 0 ? (
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <span className={styles.prevPrice}>${product.price.toFixed(2)}</span>
+          <span>${product.offPrice.toFixed(2)}</span>
+        </div>
+      ) : (
+        <span>${product.price.toFixed(2)}</span>
+      )}
     </div>
   );
 };

@@ -1,13 +1,20 @@
 .layout {
   width: 100%;
   min-height: 100vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: var(--bg-color);
 }
+
 a {
   text-decoration: none;
+}
+.loading {
+  text-align: center;
+  background-color: inherit;
+  color: var(--primary-dark-blue);
 }
 .grayText {
   font-size: 13px;
@@ -15,6 +22,61 @@ a {
 }
 button {
   cursor: pointer;
+}
+.blur {
+  color: var(--text-white);
+  position: absolute;
+  top: 7px;
+  left: 5px;
+  z-index: 300;
+  font-size: 14px;
+  padding: 0px 3px;
+  animation: down 0.3s ease-in-out;
+  -webkit-animation: down 0.3s ease-in-out;
+}
+.focused {
+  color: var(--text-white);
+  background-color: inherit;
+  position: absolute;
+  top: -12px;
+  left: 5px;
+  z-index: 300;
+  padding: 0px 3px;
+  font-size: 14px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  animation: up 0.3s ease-in-out;
+  -webkit-animation: up 0.3s ease-in-out;
+}
+.error {
+  color: var(--red-color);
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+@keyframes up {
+  0% {
+    top: 7px;
+    left: 5px;
+    color: var(--text-white);
+  }
+  100% {
+    top: -12px;
+    left: 5px;
+  }
+}
+@keyframes down {
+  0% {
+    top: -12px;
+    left: 5px;
+  }
+  100% {
+    top: 7px;
+    left: 5px;
+    color: var(--text-white);
+  }
 }
 :root {
   --primary-dark-blue: rgb(22, 24, 40);

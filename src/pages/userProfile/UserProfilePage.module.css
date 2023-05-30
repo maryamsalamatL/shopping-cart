@@ -1,0 +1,72 @@
+.mainContainer {
+  width: 100%;
+  height: calc(100vh - 5rem);
+  background-color: #fff;
+  padding: 1.5rem 0.5rem;
+  color: var(--primary-dark-blue);
+}
+
+.mainContainer h1 {
+  margin-bottom: 3rem;
+}
+.profileSec {
+  border: 1px solid rgba(173, 163, 163, 0.246);
+  padding: 15px 5px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.icon {
+  background-color: var(--pink-color);
+  color: #fff;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+.topSec {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.topSec h4 {
+  margin-left: 10px;
+  font-size: 20px;
+}
+.info {
+  border-top: 1px solid rgba(173, 163, 163, 0.246);
+  padding: 15px 5px;
+}
+.info h5 {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.info li {
+  display: flex;
+}
+.info li p {
+  margin-right: 3px;
+}
+.link {
+  color: var(--pink-color);
+  margin-top: 2rem;
+}
+@media only screen and (min-width: 768px) {
+  .mainContainer {
+    padding: 3rem;
+    height: calc(100vh - 5.5rem);
+  }
+}

@@ -1,6 +1,7 @@
 import Input from "../../common/Input";
+import styles from "./LoginForm.module.css";
 import { useFormik } from "formik";
-import { object, string, ref, array, boolean, number } from "yup";
+import { object, string } from "yup";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { loginUser } from "../../services/requestsServices";
 import { useState } from "react";
@@ -25,7 +26,9 @@ const LoginForm = () => {
   const onSubmit = (values) => {
     loginUser(values)
       .then(({ data }) => {
+        console.log(data);
         setAuth(data);
+        localStorage.setItem("authState", JSON.stringify(data));
         setError(null);
         navigate(`/${redirect}`);
       })
@@ -43,8 +46,9 @@ const LoginForm = () => {
   });
 
   return (
-    <div>
+    <div className={styles.mainContainer}>
       <form onSubmit={formik.handleSubmit}>
+        <h1>Login</h1>
         <Input name="email" formik={formik} label="Email" type="email" />
         <Input
           name="password"
@@ -52,10 +56,15 @@ const LoginForm = () => {
           label="Password"
           type="password"
         />
-        <button type="submit">Login</button>
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        <button type="submit" className={styles.btn} disabled={!formik.isValid}>
+          Login
+        </button>
+        {error && <p className="error">{error}</p>}
 
-        <Link to={`/signup${redirect && `?redirect=${redirect}`}`}>
+        <Link
+          className={styles.link}
+          to={`/signup${redirect && `?redirect=${redirect}`}`}
+        >
           <p>Not singup yet ?</p>
         </Link>
       </form>
